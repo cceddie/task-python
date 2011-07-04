@@ -1,0 +1,90 @@
+
+# - - - - - 
+def nothing(colNames, colWidthVal, colWidthTxt):
+	print "- - - - - \n\n\n"
+	
+	# note, it is ZERO indexed
+	print len(columnDict)
+	
+	
+	# 	if linenumber == 0:
+	# 		print line
+	# 	
+	# 	if linenumber == 1:
+	# 		print line
+	# 			
+	# 	linenumber = linenumber + 1
+	# 	
+	
+	# ID
+	# Project
+	# Due
+	# Priority
+	# A
+	# Description
+	# 
+	
+	print "\n\n\n"
+	
+	print columnDict[0]
+	print columnDict[20]
+	
+	x=0
+	for item in columnDict:
+		print x,
+		print item[0]	
+		x = x + 1
+	
+	0        #id
+	2        #project
+	8        #due
+	
+	3        #priority # must be shortened
+	13        #active
+	15        #depends
+	20        #wait        
+	
+	16        #description
+	19        #tag_indicator
+	18        #recurrence_indicator
+	
+	
+	# ID  Project   Due        PAd Description  
+	# 189 parenting 2010/01/20 M ! research various 10 year investments. bonds,...+R 
+	# 230 family    2010/07/27 H*! ask Des for their lawyer regrading dutch wil...+R
+
+
+
+# - - - - - - - - - - - - - - - - - - - - 
+
+
+
+# send a string that states how you want things listed
+# 1- something to declare if you want lower, upper, as is column titles
+#
+# 2- the text string that i ust make up...
+#    id space project space due space priority1 active1 recurring1 description CLIP
+#       ^^^^^                                                                  ^^^^
+#                                     ^^^^^^^^^ ^^^^^^^
+#    space and clip must be defined
+#    how to reliably show that you want an abbreviated column, not just the 
+#    text title, but the contents as well?  and what is the symbol that will
+#    be used?  hmmm....
+#
+#
+#
+# displayStyle = ( lower ) # lower, upper, as_is
+# 
+# displayCols = (	(ID, 		default), 	\
+#			(space, 	1),	 	\
+#			(Project, 	default), 	\
+#			(space, 	1),	 	\
+#			(Due, 		default), 	\
+#			(Priority, 	1), 		\
+#			(Active, 	1), 		\
+#			(space, 	1),	 	\
+#			(tags,		t), 		\
+#			(Description, 	clip), 		\
+#			(R,		default),	\
+#		)
+

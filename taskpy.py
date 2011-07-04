@@ -182,7 +182,8 @@ def displayColumns (number, line):
 	#	start = start + int(widthVal) + 1
 	#
 	#print buildLine
-	#pass
+	
+	pass
 
 
 # - - - - - 
@@ -207,7 +208,11 @@ def showAllColumns(colNames, colWidthVal, colWidthTxt):
 
         #print item
 	
-	
+def sac():
+    print "title, start, end"
+    for title, width, start, end  in twse:
+        print title.rjust(12) + str(start).rjust(5) + str(end).rjust(4)
+    	
 # - - - - - 
 # read the parsing string for output
 
@@ -226,7 +231,7 @@ print "pend, wait, recur, tot: ", pending, waiting, recurring, total
 
 # push task output into a file
 dumpTaskToFile()
-colNames, colWidthTxt, colWidthVal, twse,taskAll = mergeToOneLine()
+colNames, colWidthTxt, colWidthVal, twse, taskAll = mergeToOneLine()
 
 
 showWindowDimensions()
@@ -235,36 +240,6 @@ showAllColumns(colNames, colWidthVal, colWidthTxt)
 print "\n", colNames, colWidthVal
 
 #nothing(colNames, colWidthVal, colWidthTxt)
-
-
-# send a string that states how you want things listed
-# 1- something to declare if you want lower, upper, as is column titles
-#
-# 2- the text string that i ust make up...
-#    id space project space due space priority1 active1 recurring1 description CLIP
-#       ^^^^^                                                                  ^^^^
-#                                     ^^^^^^^^^ ^^^^^^^
-#    space and clip must be defined
-#    how to reliably show that you want an abbreviated column, not just the 
-#    text title, but the contents as well?  and what is the symbol that will
-#    be used?  hmmm....
-#
-#
-#
-# displayStyle = ( lower ) # lower, upper, as_is
-# 
-# displayCols = (	(ID, 		default), 	\
-#			(space, 	1),	 	\
-#			(Project, 	default), 	\
-#			(space, 	1),	 	\
-#			(Due, 		default), 	\
-#			(Priority, 	1), 		\
-#			(Active, 	1), 		\
-#			(space, 	1),	 	\
-#			(tags,		t), 		\
-#			(Description, 	clip), 		\
-#			(R,		default),	\
-#		)
 
 
 print twse
@@ -278,5 +253,11 @@ print " "
 print taskAll[4][216:316]
 print " "
 
-#
+
+sac()
+
+
+
+
+
 
