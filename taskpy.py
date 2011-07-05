@@ -37,7 +37,20 @@ import re
 import curses
 import os
 import time
+import subprocess
+
 from operator import itemgetter, attrgetter
+
+
+# -----------------------------------------------------------------------------
+# regex compilation
+
+leadSpaces = re.compile('^\ \ \ \ ')
+removeSpaces = re.compile('^\ *')
+trailBreak = re.compile('\s*$')
+leadBreak = re.compile('^[\t\n\r\f\v]*')
+trailTask = re.compile('\ task[s]')
+
 
 # -----------------------------------------------------------------------------
 # setting up variables
@@ -62,23 +75,31 @@ linesToDisplay = win_y - 5
 
 # -----------------------------------------------------------------------------
 def getStats():	
-	command = 'task stats > taskStat'
-	os.system(str(command))
-	taskStat = open('taskStat') 
-	
-	for line in taskStat:
-		if re.match("Pending", line):
-			dump, pending=line.split()
-		elif re.match("Waiting", line):
-			dump, waiting = line.split()
-		elif re.match ("Recurring", line):
-			dump, recurring = line.split()
-		elif re.match("Total", line):
-			dump, total = line.split()
-		else:
-			pass
-	return(pending, waiting, recurring, total)
-	pass
+    cmdStats = 'task stats > taskStat'
+    cmdBlocked = 'task blocked | tail -1'
+    
+    os.system(str(cmdStats))
+    taskStat = open('taskStat') 
+    
+    for line in taskStat:
+        if re.match("Pending", line):
+            dump, pending=line.split()
+        elif re.match("Waiting", line):
+            dump, waiting = line.split()
+        elif re.match ("Recurring", line):
+            dump, recurring = line.split()
+        elif re.match("Total", line):
+            dump, total = line.split()
+        else:
+            pass
+        
+    p = subprocess.Popen(cmdBlocked, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    blocked, stderr = p.communicate()
+    
+    blocked = trailBreak.sub('', blocked)
+
+    return(pending, waiting, recurring, blocked, total)
+    pass
 
 
 # - - - - - 
@@ -106,11 +127,6 @@ def mergeToOneLine():
 	twse=[]
 	taskAll=[] 
 	
-	leadSpaces = re.compile('^\ \ \ \ ')
-	removeSpaces = re.compile('^\ *')
-	trailBreak = re.compile('\s*$')
-	leadBreak = re.compile('^[\t\n\r\f\v]*')
-    
 	for currLine in taskStat:
 		
 		# remove trailing linefeed, returns, etc
@@ -164,24 +180,24 @@ def mergeToOneLine():
 
 # - - - - - 
 def displayColumns (number, line):
-    # print everything.  just dump it.  this is a sample
-	print number, line[0:110]
-	#	
-	#start = 0
-	#buildLine = ""
-	#	
-	#columnDict = zip(colNames,colWidthVal,colWidthTxt)
-	#for item in columnDict:
-	#	names, widthVal, widthTxt = item		
-	#	end = start + int(widthVal)
-	#	buildLine = buildLine + " " + line[start:end]
-	#	
-	#	#print names, start, end 
-	#	#print start, widthVal
-	#	
-	#	start = start + int(widthVal) + 1
-	#
-	#print buildLine
+    # # print everything.  just dump it.  this is a sample
+	# print number, line[0:110]
+	# #	
+	# #start = 0
+	# #buildLine = ""
+	# #	
+	# #columnDict = zip(colNames,colWidthVal,colWidthTxt)
+	# #for item in columnDict:
+	# #	names, widthVal, widthTxt = item		
+	# #	end = start + int(widthVal)
+	# #	buildLine = buildLine + " " + line[start:end]
+	# #	
+	# #	#print names, start, end 
+	# #	#print start, widthVal
+	# #	
+	# #	start = start + int(widthVal) + 1
+	# #
+	# #print buildLine
 	
 	pass
 
@@ -192,22 +208,18 @@ def showWindowDimensions():
 
 
 # - - - - - 
-def showAllColumns(colNames, colWidthVal, colWidthTxt):
-	linenumber = 0
-	
-	print "- - - - - "			
-	print "#, column, width"
-	
-	columnDict = zip(colNames,colWidthVal,colWidthTxt)
-	for item in columnDict:
-		names, widthVal, widthTxt = item
-		
-		while linenumber < 20:
-		    print linenumber, names, widthVal
-		    linenumber = linenumber + 1
+def renderTitleBar(taskPending, taskWaiting, taskRecurring, taskBlocked, taskTotal):
+    tStart = 'task: one page output'
+    tBlock = '(' + taskBlocked + ' blocked, ' 
+    tWait  = taskWaiting + ' waiting) '
+    tShow  = 'showing xx of ' + taskTotal
+        
+    right = tBlock + tWait + tShow
+    print tStart + right.rjust(win_x - len(tStart) )
+    pass
+    
 
-        #print item
-	
+# - - - - - 
 def sac():
     print "title, start, end"
     for title, width, start, end  in twse:
@@ -223,19 +235,19 @@ def sac():
 # and here we go...
 
 
-# dump stats first as it is a faster, more accurate way to get the stats (duh)
-pending, waiting, recurring, total = getStats()
-print ""
-print "pend, wait, recur, tot: ", pending, waiting, recurring, total
+# need this info first
+showWindowDimensions()
 
+# dump stats first as it is a faster, more accurate way to get the stats (duh)
+taskPending, taskWaiting, taskRecurring, taskBlocked, taskTotal = getStats()
+
+renderTitleBar(taskPending, taskWaiting, taskRecurring, taskBlocked, taskTotal)
 
 # push task output into a file
 dumpTaskToFile()
 colNames, colWidthTxt, colWidthVal, twse, taskAll = mergeToOneLine()
 
 
-showWindowDimensions()
-showAllColumns(colNames, colWidthVal, colWidthTxt)
 
 print "\n", colNames, colWidthVal
 
@@ -255,9 +267,6 @@ print " "
 
 
 sac()
-
-
-
 
 
 
