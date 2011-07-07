@@ -447,7 +447,7 @@ print taskAll[1][twse[20][2]:twse[20][2] + win_x - 2]
 print " ================================= "
 counter1 = counter = 0
 line = ''
-display = [ 'ID', 'space', 'Project', 'space', 'Due', 'space', 'Description' ]
+display = [ 'ID', 'space', 'UUID', 'Project', 'space', 'Due', 'space', 'Description' ]
 
 overallwidth = count = 0 
 while count < 10:
@@ -461,22 +461,87 @@ while count < 10:
             line = line + taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1])
             overallwidth = overallwidth + len(taskAll[count][twse[0][2]:twse[0][3]])
         elif item == "UUID":
-            line = line + taskAll[count][twse[1][2]:twse[1][3]]
-            overallwidth = overallwidth + twse[1][1]
+            line = line + taskAll[count][twse[1][2]:twse[1][3]].rjust(twse[1][1])
+            overallwidth = overallwidth + len(taskAll[count][twse[1][2]:twse[1][3]])
+
+            #line = line + taskAll[count][twse[1][2]:twse[1][3]]
+            #overallwidth = overallwidth + twse[1][1]
         elif item == 'Project':
             line = line + 'Project'
             overallwidth = overallwidth + len(item)
         elif item == 'Due':
-            line = line + 'Due'
-            overallwidth = overallwidth + len(item)
+            line = line + taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1])
+            overallwidth = overallwidth + len(taskAll[count][twse[0][2]:twse[0][3]])
+            #line = line + 'Due'
+            #overallwidth = overallwidth + len(item)
         elif item == 'Description':
             line = line + 'Description'
             overallwidth = overallwidth + len(item)
         else:
             pass
-    print line
+    print line, overallwidth
     line = ''
     counter = 0
+
+
+
+
+
+
+
+
+
+
+print "\n\n\n\n================================= "
+counter1 = counter = 0
+line = ''
+display = [ 'ID', 'space', 'UUID', 'Project', 'space', 'Due', 'space', 'Description' ]
+
+overallwidth = count = 0 
+while count < 1:
+    count = count + 1
+    print str(count).rjust(3),
+    for item in display:
+        for title, width, start, end in twse:
+            if item == title:
+                print item, 
+            #
+            # ok, add in the below stuff, but now i have the start/end/width appropriately
+            # and can add in all of them in a single iteration.  
+            # woot for me
+            
+            
+            
+            
+            
+#        if item == 'space':
+#            line = line + ' '
+#            overallwidth = overallwidth + 1
+#        elif item == 'ID':
+#            line = line + taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1])
+#            overallwidth = overallwidth + len(taskAll[count][twse[0][2]:twse[0][3]])
+#        elif item == "UUID":
+#            line = line + taskAll[count][twse[1][2]:twse[1][3]].rjust(twse[1][1])
+#            overallwidth = overallwidth + len(taskAll[count][twse[1][2]:twse[1][3]])
+# 
+#            #line = line + taskAll[count][twse[1][2]:twse[1][3]]
+#            #overallwidth = overallwidth + twse[1][1]
+#        elif item == 'Project':
+#            line = line + 'Project'
+#            overallwidth = overallwidth + len(item)
+#        elif item == 'Due':
+#            line = line + taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1])
+#            overallwidth = overallwidth + len(taskAll[count][twse[0][2]:twse[0][3]])
+#            #line = line + 'Due'
+#            #overallwidth = overallwidth + len(item)
+#        elif item == 'Description':
+#            line = line + 'Description'
+#            overallwidth = overallwidth + len(item)
+#        else:
+#            pass
+#    print line, overallwidth
+#    line = ''
+#    counter = 0
 
 
         
