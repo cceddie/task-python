@@ -1,0 +1,10 @@
+taskpy.py
+
+this is a pythhon script that parses the output of task, a great list program
+made by Paul Beckingham and a few others.  Learn more at taskwarrior.org.
+
+task is released under a GPL license (I think)
+
+taskpy should pick a license, but i suspect it wil be GPL or BSD.  definitely
+open source
+

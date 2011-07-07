@@ -1,0 +1,9 @@
+installing taskpy.py
+
+you need python installed
+
+you also need to have a very specific task command that lists all of the possible
+columns.
+
+other than that, just make sure the script has task pointing at the right place
+
