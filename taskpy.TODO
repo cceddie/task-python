@@ -2,9 +2,14 @@ TODO:
 
 Must get done now:
 - get epoch->YYYY-mm-dd converter
-
-
-
+- fix the titlebar status info for block, wait, etc.
+- note that #showing is a func of the bash shell prompt, so this
+  should be coded into the system as a config variable
+- curr bashTask uses two lines to display title
+  crunch that into one line.  id/proj/etc still on left
+  push task title to the right along with status info
+  - if clever, adjust status info based on avail sapce
+  
 Longer Term Items
 
 2011 July
@@ -31,5 +36,5 @@ Longer Term Items
 - config so that taskpy looks for task and the .taskrc or pending database
   it should also make sure that it has file r/w permission somewhere
   
-  
+- global variable for date format  
 
