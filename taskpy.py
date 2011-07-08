@@ -498,18 +498,19 @@ line = ''
 display = [ 'ID', 'space', 'UUID', 'Project', 'space', 'Due', 'space', 'Description' ]
 
 overallwidth = count = 0 
-while count < 1:
+while count < 2:
     count = count + 1
     print str(count).rjust(3),
     for item in display:
         for title, width, start, end in twse:
             if item == title:
+                # print taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1]), 
                 print item, 
             #
             # ok, add in the below stuff, but now i have the start/end/width appropriately
             # and can add in all of them in a single iteration.  
             # woot for me
-            
+    print
             
             
             
@@ -543,6 +544,7 @@ while count < 1:
 #    line = ''
 #    counter = 0
 
+print twse
 
         
     
