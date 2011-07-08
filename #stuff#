@@ -1,0 +1,120 @@
+if   item == "         ID":     3    0    3
+elif item == "       UUID":    36    4   40
+elif item == "    Project":     9   41   50
+elif item == "        Pri":     3   51   54
+elif item == "        Pri":     6   55   61
+elif item == "      Added":    10   62   72
+elif item == "    Started":    10   73   83
+elif item == "  Completed":     9   84   93
+elif item == "        Due":    10   94  104
+elif item == "  Countdown":     9  105  114
+elif item == "  Countdown":     9  115  124
+elif item == "        Age":     7  125  132
+elif item == "        Age":     4  133  137
+elif item == "     Active":     6  138  144
+elif item == "       Tags":    46  145  191
+elif item == "       Deps":     4  192  196
+elif item == "      Recur":     9  197  206
+elif item == "          R":     1  207  208
+elif item == "          T":     1  209  210
+elif item == "       Wait":     4  211  215
+elif item == "Description":   867  216 1083
+
+              0    1    2    3
+              t    w    s    e
+  0          ID    3    0    3
+  1        UUID   36    4   40
+  2     Project    9   41   50
+  3         Pri    3   51   54
+  4         Pri    6   55   61
+  5       Added   10   62   72
+  6     Started   10   73   83
+  7   Completed    9   84   93
+  8         Due   10   94  104
+  9   Countdown    9  105  114
+ 10   Countdown    9  115  124
+ 11         Age    7  125  132
+ 12         Age    4  133  137
+ 13      Active    6  138  144
+ 14        Tags   46  145  191
+ 15        Deps    4  192  196
+ 16       Recur    9  197  206
+ 17           R    1  207  208
+ 18           T    1  209  210
+ 19        Wait    4  211  215
+ 20 Description  867  216 1083
+
+
+
+ 
+
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+elif item == "ID":
+    line = line + taskAl[1][twse[00][2]:twse[00][3]]
+elif item == "UUID":
+    line = line + taskAl[1][twse[01][2]:twse[01][3]]
+elif item == "Project":
+    line = line + taskAl[1][twse[02][2]:twse[02][3]]
+elif item == "Pri":
+    line = line + taskAl[1][twse[03][2]:twse[03][3]]
+elif item == "Pri":
+    line = line + taskAl[1][twse[04][2]:twse[04][3]]
+elif item == "Added":
+    line = line + taskAl[1][twse[05][2]:twse[05][3]]
+elif item == "Started":
+    line = line + taskAl[1][twse[06][2]:twse[06][3]]
+elif item == "Completed":
+    line = line + taskAl[1][twse[07][2]:twse[07][3]]
+elif item == "Due":
+    line = line + taskAl[1][twse[08][2]:twse[08][3]]
+elif item == "Countdown":
+    line = line + taskAl[1][twse[09][2]:twse[09][3]]
+elif item == "Countdown":
+    line = line + taskAl[1][twse[10][2]:twse[10][3]]
+elif item == "Age":
+    line = line + taskAl[1][twse[11][2]:twse[11][3]]
+elif item == "Age":
+    line = line + taskAl[1][twse[12][2]:twse[12][3]]
+elif item == "Active":
+    line = line + taskAl[1][twse[13][2]:twse[13][3]]
+elif item == "Tags":
+    line = line + taskAl[1][twse[14][2]:twse[14][3]]
+elif item == "Deps":
+    line = line + taskAl[1][twse[15][2]:twse[15][3]]
+elif item == "Recur":
+    line = line + taskAl[1][twse[16][2]:twse[16][3]]
+elif item == "R":
+    line = line + taskAl[1][twse[17][2]:twse[17][3]]
+elif item == "T":
+    line = line + taskAl[1][twse[18][2]:twse[18][3]]
+elif item == "Wait":
+    line = line + taskAl[1][twse[19][2]:twse[19][3]]
+elif item == "Description":
+    line = line + taskAl[1][twse[20][2]:twse[20][3]]
+                       

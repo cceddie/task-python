@@ -31,5 +31,5 @@ Longer Term Items
 - config so that taskpy looks for task and the .taskrc or pending database
   it should also make sure that it has file r/w permission somewhere
   
-  
+- global variable for date format  
 
