@@ -38,3 +38,10 @@ Longer Term Items
   
 - global variable for date format  
 
+- depending on distance, convert date from YYYY/MMM/DD (11 chars) to:
+  - yest, today, tomorrow
+  - {next|past} {Mon/Tue/Wed/...}
+  - YYYY MMM DD
+
+  
+  
