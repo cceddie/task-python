@@ -1,0 +1,23 @@
+task helper- script to organize task output by category:
+   
+ -   default           :first page of all tasks
+ - f filter/filt       :subset of active tasks, xref "other" for the reverse list
+ - o other             :invert of default
+                       
+ - a all               
+ - d dump              :stats
+                       
+ -   Aldus             
+ -   Torsten           
+ -   Parenting/Parent/parent         
+ -   computer          
+ -   home              
+ -   movie/music/tv    
+ -   read              
+ -   work              : work items
+                       
+ -   version           :get version info
+ -   help              :this note
+ -   Help              :generate task's builtin help
+
+ 
