@@ -14,7 +14,8 @@ Longer Term Items
 
 2011 July
 
-- i should see if someone else wants to take this over.  
+- i should see if someone else wants to take this over.  you know, someone
+  who knows how to write code 
 
 - need to talk to paul and ask him if there is a programatic way to determine
   the columns that are available.  currently, i only see a list in one of the
@@ -43,5 +44,40 @@ Longer Term Items
   - {next|past} {Mon/Tue/Wed/...}
   - YYYY MMM DD
 
+<<<<<<< HEAD
   
+=======
+- i should prob try to make this thing run faster...  for bash to be faster 
+  than python is probably a bad thing
+  
+    $ time ./taskpy.py > /dev/null ; time ./taskpy.py > /dev/null; time ./taskpy.py > /dev/null
+    
+    real	0m0.522s
+    user	0m0.467s
+    sys	0m0.048s
+    
+    real	0m0.507s
+    user	0m0.459s
+    sys	0m0.041s
+    
+    real	0m0.552s
+    user	0m0.500s
+    sys	0m0.045s
+
+
+    $ time t > /dev/null ; time t > /dev/null ; time t > /dev/null
+    
+    real	0m0.338s
+    user	0m0.290s
+    sys	0m0.067s
+    
+    real	0m0.328s
+    user	0m0.285s
+    sys	0m0.062s
+    
+    real	0m0.330s
+    user	0m0.285s
+    sys	0m0.064s
+    
+>>>>>>> dev-2011-07-11
   

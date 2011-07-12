@@ -38,6 +38,8 @@ import curses
 import os
 import time
 import subprocess
+import sys
+
 #import time
 
 from operator import itemgetter, attrgetter
@@ -56,6 +58,7 @@ trailTask = re.compile('\ task[s]')
 # -----------------------------------------------------------------------------
 # setting up variables
 
+version = '0.0.0.0.0.0.1 beta'
 linenumber=0
 colNames=[]
 colWidthTxt=[]
@@ -72,6 +75,9 @@ stdscr = curses.initscr()
 win_y,win_x=stdscr.getmaxyx()
 curses.endwin()
 linesToDisplay = win_y - 4 # because your shell might east some extra lines
+
+display = [ 'ID', 'space', 'Project', 'space', 'Due', 'space', 'Priority1', 'Active1', 'space', 'Description' ]
+ellipsis = '...'
 
 
 # -----------------------------------------------------------------------------
@@ -219,6 +225,141 @@ def renderTitleBar(taskPending, taskWaiting, taskRecurring, taskBlocked, taskTot
     print tStart + right.rjust(win_x - len(tStart) )
     pass
     
+# - - - - - 
+def renderTask():
+    line = ''
+    overallwidth = count = 0 
+    
+    while count < linesToDisplay:
+        count = count + 1
+        # put in a catch here to filter lines based on passed params
+        # then pass matched line to a render function...
+        
+        for item in display:
+            # there *must* be a smarter way of doing this.  but at 2am, this is
+            # is the only thing my brain can handle.  granted, maybe i should
+            # not have had that second beer...
+            
+            if item == 'space':
+                line = line + ' '
+                overallwidth = overallwidth + 1
+            
+            elif item == 'ID':
+                line = line + taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[0][2]:twse[0][3]])
+            
+            elif item == 'UUID':
+                line = line + taskAll[count][twse[1][2]:twse[1][3]].rjust(twse[1][1]) 
+                overallwidth = overallwidth + len(taskAll[count][twse[1][2]:twse[1][3]])
+                
+            elif item == 'Project':
+                line = line + taskAll[count][twse[2][2]:twse[2][3]].rjust(twse[2][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[2][2]:twse[2][3]])
+                
+            elif item == 'Priority1':
+                line = line + taskAll[count][twse[3][2]:twse[3][2]+1]
+                overallwidth = overallwidth + 1
+                
+            elif item == 'Pri':
+                line = line + taskAll[count][twse[3][2]:twse[3][3]].rjust(twse[3][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[3][2]:twse[3][3]])
+                
+            elif item == 'Priority':
+                line = line + taskAll[count][twse[4][2]:twse[4][3]].rjust(twse[4][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[4][2]:twse[4][3]])
+                
+            elif item == 'Added':
+                line = line + taskAll[count][twse[5][2]:twse[5][3]].rjust(twse[5][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[5][2]:twse[5][3]])
+                
+            elif item == 'Started':
+                line = line + taskAll[count][twse[6][2]:twse[6][3]].rjust(twse[6][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[6][2]:twse[6][3]])
+                
+            elif item == 'Completed':
+                line = line + taskAll[count][twse[7][2]:twse[7][3]].rjust(twse[7][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[7][2]:twse[7][3]])
+                
+            elif item == 'Due':
+                # insert a loop to change date format if i want
+                # insert a loop to catch end of "today" and then print bash underline instead of my goofy script
+                line = line + taskAll[count][twse[8][2]:twse[8][3]].rjust(twse[8][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[8][2]:twse[8][3]])
+                
+            elif item == 'Countdown':
+                line = line + taskAll[count][twse[9][2]:twse[9][3]].rjust(twse[9][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[9][2]:twse[9][3]])
+                
+            elif item == 'Countdown':
+                line = line + taskAll[count][twse[10][2]:twse[10][3]].rjust(twse[10][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[10][2]:twse[10][3]])
+                
+            elif item == 'Age':
+                line = line + taskAll[count][twse[11][2]:twse[11][3]].rjust(twse[11][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[11][2]:twse[11][3]])
+                
+            elif item == 'Age':
+                line = line + taskAll[count][twse[12][2]:twse[12][3]].rjust(twse[12][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[12][2]:twse[12][3]])
+                
+            elif item == 'Active1':
+                line = line + taskAll[count][twse[13][2]:twse[13][2]+1]
+                overallwidth = overallwidth + 1
+                
+            elif item == 'Active':
+                line = line + taskAll[count][twse[13][2]:twse[13][3]].rjust(twse[13][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[13][2]:twse[13][3]])
+                
+            elif item == 'Tags':
+                line = line + taskAll[count][twse[14][2]:twse[14][3]].rjust(twse[14][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[14][2]:twse[14][3]])
+                
+            elif item == 'Deps':
+                line = line + taskAll[count][twse[15][2]:twse[15][3]].rjust(twse[15][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[15][2]:twse[15][3]])
+                
+            elif item == 'Recur':
+                line = line + taskAll[count][twse[16][2]:twse[16][3]].rjust(twse[16][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[16][2]:twse[16][3]])
+            
+            elif item == 'R':
+                line = line + taskAll[count][twse[17][2]:twse[17][3]].rjust(twse[17][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[17][2]:twse[17][3]])
+            
+            elif item == 'T':
+                line = line + taskAll[count][twse[18][2]:twse[18][3]].rjust(twse[18][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[18][2]:twse[18][3]])
+                
+            elif item == 'Wait':
+                line = line +  taskAll[count][twse[19][2]:twse[19][3]].rjust(twse[19][1])
+                overallwidth = overallwidth + len(taskAll[count][twse[19][2]:twse[19][3]])
+            
+            elif item == 'Description':
+                # get the overall width calculation done here for the rjust
+                # ...in fact, might have to pre-calculate it as there might be something
+                # to the right of descrip...
+                
+                # if len(descrip) > remainin space, crop and add ellipses
+                # else, just pass through
+                
+                
+                if ( len(taskAll[count][twse[20][2]:]) + len(line) ) > win_x:
+                    line = line + taskAll[count][twse[20][2]:twse[20][2]+(win_x - overallwidth - len(ellipsis) )]
+                    line = line + ellipsis
+                    overallwidth = overallwidth + len(taskAll[count][twse[20][2]:twse[20][2]+(win_x - overallwidth - len(ellipsis) )] )
+                    
+                else:
+                    line = line + taskAll[count][twse[20][2]:twse[20][2]+(win_x - overallwidth )]
+                    overallwidth = overallwidth + len(taskAll[count][twse[20][2]:twse[20][2]+(win_x - overallwidth )] )
+                        
+            else:
+                print "something bad happened"
+                pass
+    
+        print line
+        line = ''
+        overallwidth = 0
+
 
 # - - - - - 
 def dumpTWSE():
@@ -257,141 +398,57 @@ colNames, colWidthTxt, colWidthVal, twse, taskAll = mergeToOneLine()
 # should generally not need to use these
 
 # showWindowDimensions()
-dumpTWSE()
+# dumpTWSE()
+
+#renderColumnTitles()
+
+renderTask()
+#
+#
+#try:
+#    sys.argv[1]
+#except:
+#    print 'nothing passed'
+#else:
+#    if sys.argv[1] == 'help' or sys.argv[1] == '?' :
+#        print 'print from the help file'
+#    elif sys.argv[1] == 'Help':
+#        print 'print task help (not my script)'
+#    elif sys.argv[1] == 'License':
+#        print 'dump GPL nonsense'
+#    elif sys.argv[1] == 'Aldus':
+#        print 'Aldus'
+#    elif sys.argv[1] == 'Torsten':
+#        print 'Torsten'
+#    elif sys.argv[1] == 'children' or sys.argv[1] == 'kids' or sys.argv[1] == 'parenting' or sys.argv[1] == 'parent' :
+#        print 'parenting, both kids'
+#    elif sys.argv[1] == 'computer' or sys.argv[1] == 'mac'  or sys.argv[1] == 'Mac' :
+#        print 'print computer'
+#    elif sys.argv[1] == 'home': 
+#        print 'print home  '
+#    elif sys.argv[1] == 'movie' or sys.argv[1] == 'music' or sys.argv[1] == 'tv': 
+#        print 'movie/music/tv  '
+#    elif sys.argv[1] == 'read' or sys.argv[1] == 'book' :
+#        print 'books and reading  '
+#    elif sys.argv[1] == 'work':
+#        print 'work, nexpres, expres, jive   '
+#    elif sys.argv[1] == 'version':
+#        print 'version ', version
+#    else:
+#        print 'nothing passed'
+#
 
 
 
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# ok, a working pass of the rendering
 
-line = ''
-display = [ 'ID', 'space', 'Project', 'space', 'Priority1', 'Active1', 'space', 'Due', 'space', 'Description' ]
-overallwidth = count = 0 
 
-# 
-# ok, this cycles dumps the tasks
-#while count < linesToDisplay:
-while count < 10:
-    count = count + 1
-    # print str(count).rjust(3), # just to figure out what i am printing
-    for item in display:
-        # there *must* be a smarter way of doing this.  but at 2am, this is
-        # is the only thing my brain can handle.  granted, maybe i should
-        # not have had that second beer...
-        
-        if item == 'space':
-            line = line + ' '
-            overallwidth = overallwidth + 1
-        
-        elif item == 'ID':
-            line = line + taskAll[count][twse[0][2]:twse[0][3]].rjust(twse[0][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[0][2]:twse[0][3]])
-        
-        elif item == 'UUID':
-            line = line + taskAll[count][twse[1][2]:twse[1][3]].rjust(twse[1][1]) 
-            overallwidth = overallwidth + len(taskAll[count][twse[1][2]:twse[1][3]])
-            
-        elif item == 'Project':
-            line = line + taskAll[count][twse[2][2]:twse[2][3]].rjust(twse[2][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[2][2]:twse[2][3]])
-            
-        elif item == 'Priority1':
-            line = line + taskAll[count][twse[3][2]:twse[3][2]+1]
-            overallwidth = overallwidth + len(taskAll[count][twse[3][2]:twse[3][3]])
-            
-        elif item == 'Pri':
-            line = line + taskAll[count][twse[3][2]:twse[3][3]].rjust(twse[3][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[3][2]:twse[3][3]])
-            
-        elif item == 'Priority':
-            line = line + taskAll[count][twse[4][2]:twse[4][3]].rjust(twse[4][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[4][2]:twse[4][3]])
-            
-        elif item == 'Added':
-            line = line + taskAll[count][twse[5][2]:twse[5][3]].rjust(twse[5][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[5][2]:twse[5][3]])
-            
-        elif item == 'Started':
-            line = line + taskAll[count][twse[6][2]:twse[6][3]].rjust(twse[6][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[6][2]:twse[6][3]])
-            
-        elif item == 'Completed':
-            line = line + taskAll[count][twse[7][2]:twse[7][3]].rjust(twse[7][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[7][2]:twse[7][3]])
-            
-        elif item == 'Due':
-            # insert a loop to change date format if i want
-            # insert a loop to catch end of "today" and then print bash underline instead of my goofy script
-            line = line + taskAll[count][twse[8][2]:twse[8][3]].rjust(twse[8][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[8][2]:twse[8][3]])
-            
-        elif item == 'Countdown':
-            line = line + taskAll[count][twse[9][2]:twse[9][3]].rjust(twse[9][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[9][2]:twse[9][3]])
-            
-        elif item == 'Countdown':
-            line = line + taskAll[count][twse[10][2]:twse[10][3]].rjust(twse[10][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[10][2]:twse[10][3]])
-            
-        elif item == 'Age':
-            line = line + taskAll[count][twse[11][2]:twse[11][3]].rjust(twse[11][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[11][2]:twse[11][3]])
-            
-        elif item == 'Age':
-            line = line + taskAll[count][twse[12][2]:twse[12][3]].rjust(twse[12][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[12][2]:twse[12][3]])
-            
-        elif item == 'Active1':
-            line = line + taskAll[count][twse[13][2]:twse[13][2]+1]
-            overallwidth = overallwidth + len(taskAll[count][twse[13][2]:twse[13][3]])
-            
-        elif item == 'Active':
-            line = line + taskAll[count][twse[13][2]:twse[13][3]].rjust(twse[13][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[13][2]:twse[13][3]])
-            
-        elif item == 'Tags':
-            line = line + taskAll[count][twse[14][2]:twse[14][3]].rjust(twse[14][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[14][2]:twse[14][3]])
-            
-        elif item == 'Deps':
-            line = line + taskAll[count][twse[15][2]:twse[15][3]].rjust(twse[15][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[15][2]:twse[15][3]])
-            
-        elif item == 'Recur':
-            line = line + taskAll[count][twse[16][2]:twse[16][3]].rjust(twse[16][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[16][2]:twse[16][3]])
-        
-        elif item == 'R':
-            line = line + taskAll[count][twse[17][2]:twse[17][3]].rjust(twse[17][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[17][2]:twse[17][3]])
-        
-        elif item == 'T':
-            line = line + taskAll[count][twse[18][2]:twse[18][3]].rjust(twse[18][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[18][2]:twse[18][3]])
-            
-        elif item == 'Wait':
-            line = line + taskAll[count][twse[19][2]:twse[19][3]].rjust(twse[19][1])
-            overallwidth = overallwidth + len(taskAll[count][twse[19][2]:twse[19][3]])
-        
-        elif item == 'Description':
-            # get the overall width calculation done here for the rjust
-            # ...in fact, might have to pre-calculate it as there might be something
-            # to the right of descrip...
-            
-            # if len(descrip) > remainin space, crop and add ellipses
-            # else, just pass through
-            
-            line = line + taskAll[count][twse[20][2]:twse[20][2]+(win_x - overallwidth - 3 )]
-            overallwidth = overallwidth + len(taskAll[count][twse[20][2]:twse[20][3]])
-        
-        else:
-            print "something bad happened"
-            pass
 
-    print line
-    line = ''
-    overallwidth = 0
+
+
+
+
+
+
 
 
 
