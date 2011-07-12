@@ -220,7 +220,7 @@ def renderTitleBar(taskPending, taskWaiting, taskRecurring, taskBlocked, taskTot
     tStart = 'task: one page output'
     tBlock = '(' + taskBlocked + ' blocked, ' 
     tWait  = taskWaiting + ' waiting) '
-    tShow  = 'showing ' + str(linesToDisplay) + ' of ' + taskTotal
+    tShow  = 'showing ' + str(linesToDisplay) + ' of ' + taskPending
         
     right = tBlock + tWait + tShow
     print tStart + right.rjust(win_x - len(tStart) )
