@@ -403,40 +403,40 @@ colNames, colWidthTxt, colWidthVal, twse, taskAll = mergeToOneLine()
 #renderColumnTitles()
 
 renderTask()
-
-
-try:
-    sys.argv[1]
-except:
-    print 'nothing passed'
-else:
-    if sys.argv[1] == 'help' or sys.argv[1] == '?' :
-        print 'print from the help file'
-    elif sys.argv[1] == 'Help':
-        print 'print task help (not my script)'
-    elif sys.argv[1] == 'License':
-        print 'dump GPL nonsense'
-    elif sys.argv[1] == 'Aldus':
-        print 'Aldus'
-    elif sys.argv[1] == 'Torsten':
-        print 'Torsten'
-    elif sys.argv[1] == 'children' or sys.argv[1] == 'kids' or sys.argv[1] == 'parenting' or sys.argv[1] == 'parent' :
-        print 'parenting, both kids'
-    elif sys.argv[1] == 'computer' or sys.argv[1] == 'mac'  or sys.argv[1] == 'Mac' :
-        print 'print computer'
-    elif sys.argv[1] == 'home': 
-        print 'print home  '
-    elif sys.argv[1] == 'movie' or sys.argv[1] == 'music' or sys.argv[1] == 'tv': 
-        print 'movie/music/tv  '
-    elif sys.argv[1] == 'read' or sys.argv[1] == 'book' :
-        print 'books and reading  '
-    elif sys.argv[1] == 'work':
-        print 'work, nexpres, expres, jive   '
-    elif sys.argv[1] == 'version':
-        print 'version ', version
-    else:
-        print 'nothing passed'
-
+#
+#
+#try:
+#    sys.argv[1]
+#except:
+#    print 'nothing passed'
+#else:
+#    if sys.argv[1] == 'help' or sys.argv[1] == '?' :
+#        print 'print from the help file'
+#    elif sys.argv[1] == 'Help':
+#        print 'print task help (not my script)'
+#    elif sys.argv[1] == 'License':
+#        print 'dump GPL nonsense'
+#    elif sys.argv[1] == 'Aldus':
+#        print 'Aldus'
+#    elif sys.argv[1] == 'Torsten':
+#        print 'Torsten'
+#    elif sys.argv[1] == 'children' or sys.argv[1] == 'kids' or sys.argv[1] == 'parenting' or sys.argv[1] == 'parent' :
+#        print 'parenting, both kids'
+#    elif sys.argv[1] == 'computer' or sys.argv[1] == 'mac'  or sys.argv[1] == 'Mac' :
+#        print 'print computer'
+#    elif sys.argv[1] == 'home': 
+#        print 'print home  '
+#    elif sys.argv[1] == 'movie' or sys.argv[1] == 'music' or sys.argv[1] == 'tv': 
+#        print 'movie/music/tv  '
+#    elif sys.argv[1] == 'read' or sys.argv[1] == 'book' :
+#        print 'books and reading  '
+#    elif sys.argv[1] == 'work':
+#        print 'work, nexpres, expres, jive   '
+#    elif sys.argv[1] == 'version':
+#        print 'version ', version
+#    else:
+#        print 'nothing passed'
+#
 
 
 
