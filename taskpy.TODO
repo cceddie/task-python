@@ -1,7 +1,6 @@
 TODO:
 
 Must get done now:
-- get epoch->YYYY-mm-dd converter
 - fix the titlebar status info for block, wait, etc.
 - note that #showing is a func of the bash shell prompt, so this
   should be coded into the system as a config variable
@@ -44,9 +43,6 @@ Longer Term Items
   - {next|past} {Mon/Tue/Wed/...}
   - YYYY MMM DD
 
-<<<<<<< HEAD
-  
-=======
 - i should prob try to make this thing run faster...  for bash to be faster 
   than python is probably a bad thing
   
@@ -78,6 +74,4 @@ Longer Term Items
     real	0m0.330s
     user	0m0.285s
     sys	0m0.064s
-    
->>>>>>> dev-2011-07-11
-  
+

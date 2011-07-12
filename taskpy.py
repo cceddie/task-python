@@ -52,7 +52,7 @@ leadSpaces = re.compile('^\ \ \ \ ')
 removeSpaces = re.compile('^\ *')
 trailBreak = re.compile('\s*$')
 leadBreak = re.compile('^[\t\n\r\f\v]*')
-trailTask = re.compile('\ task[s]')
+trailTask = re.compile('\ task.*$')
 
 
 # -----------------------------------------------------------------------------
@@ -104,6 +104,7 @@ def getStats():
     blocked, stderr = p.communicate()
     
     blocked = trailBreak.sub('', blocked)
+    blocked = trailTask.sub('', blocked)
 
     return(pending, waiting, recurring, blocked, total)
     pass
@@ -219,7 +220,7 @@ def renderTitleBar(taskPending, taskWaiting, taskRecurring, taskBlocked, taskTot
     tStart = 'task: one page output'
     tBlock = '(' + taskBlocked + ' blocked, ' 
     tWait  = taskWaiting + ' waiting) '
-    tShow  = 'showing xx of ' + taskTotal
+    tShow  = 'showing ' + str(linesToDisplay) + ' of ' + taskTotal
         
     right = tBlock + tWait + tShow
     print tStart + right.rjust(win_x - len(tStart) )
@@ -437,10 +438,6 @@ renderTask()
 #    else:
 #        print 'nothing passed'
 #
-
-
-
-
 
 
 
